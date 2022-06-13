@@ -13,7 +13,12 @@ const Navbar = () => {
         <Logo>samer</Logo>
       </Link>
 
-      <input type="checkbox" id="click" />
+      <input
+        checked={showMenu}
+        onChange={() => {}}
+        type="checkbox"
+        id="click"
+      />
       <label
         htmlFor="click"
         className="menu-btn"
@@ -23,15 +28,24 @@ const Navbar = () => {
       </label>
 
       <NavItems>
-        <NavItem className="click-animation-1">
+        <NavItem
+          className="click-animation-1"
+          onClick={() => setShowMenu(false)}
+        >
           <Link to="/skills">skills</Link>
         </NavItem>
 
-        <NavItem className="click-animation-1">
+        <NavItem
+          className="click-animation-1"
+          onClick={() => setShowMenu(false)}
+        >
           <Link to="/portfolio">portfolio</Link>
         </NavItem>
 
-        <NavItem className="click-animation-1">
+        <NavItem
+          className="click-animation-1"
+          onClick={() => setShowMenu(false)}
+        >
           <Link to="/events">events</Link>
         </NavItem>
       </NavItems>

@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
     <Container>
       <Heading>The requested URL was not found on this server.</Heading>
-      <HomeLink href="/">Back to the home page</HomeLink>
+      <Link to="/">Back to the home page</Link>
     </Container>
   );
 };
@@ -16,6 +17,20 @@ const Container = styled.div`
   font-size: 14px;
   background-color: #f6f6f6;
   color: #333;
+
+  a {
+    font-size: 2vw;
+    font-weight: 500;
+
+    &:hover,
+    &:active {
+      color: #000;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 4.5vw;
+    }
+  }
 `;
 
 const Heading = styled.h1`
@@ -25,20 +40,6 @@ const Heading = styled.h1`
 
   @media screen and (max-width: 768px) {
     font-size: 6vw;
-  }
-`;
-
-const HomeLink = styled.a`
-  font-size: 2vw;
-  font-weight: 500;
-
-  &:hover,
-  &:active {
-    color: #000;
-  }
-
-  @media screen and (max-width: 768px) {
-    font-size: 4.5vw;
   }
 `;
 
