@@ -1,11 +1,14 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
     <Container>
+      <Navbar />
+
       <Routes>
         <Route path="/not-found" element={<NotFound />} />
         <Route path="/" element={<Home />} />

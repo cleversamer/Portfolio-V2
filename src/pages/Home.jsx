@@ -3,13 +3,11 @@ import styled from "styled-components";
 const Home = () => {
   return (
     <Container>
-      <Heading>Home</Heading>
+      <h1>Home</h1>
     </Container>
   );
 };
 
 const Container = styled.div``;
-
-const Heading = styled.h1``;
 
 export default Home;

@@ -15,3 +15,19 @@ a {
   color: inherit;
   cursor: pointer;
 }
+
+.click-animation-1 {
+  transition-duration: 0.3s;
+}
+
+.click-animation-2 {
+  transition-duration: 0.3s;
+}
+
+.click-animation-1:active {
+  transform: scale(0.99);
+}
+
+.click-animation-2:active {
+  transform: scale(0.98);
+}
