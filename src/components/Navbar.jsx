@@ -28,24 +28,15 @@ const Navbar = () => {
       </label>
 
       <NavItems>
-        <NavItem
-          className="click-animation-1"
-          onClick={() => setShowMenu(false)}
-        >
+        <NavItem onClick={() => setShowMenu(false)}>
           <Link to="/skills">skills</Link>
         </NavItem>
 
-        <NavItem
-          className="click-animation-1"
-          onClick={() => setShowMenu(false)}
-        >
+        <NavItem onClick={() => setShowMenu(false)}>
           <Link to="/portfolio">portfolio</Link>
         </NavItem>
 
-        <NavItem
-          className="click-animation-1"
-          onClick={() => setShowMenu(false)}
-        >
+        <NavItem onClick={() => setShowMenu(false)}>
           <Link to="/events">events</Link>
         </NavItem>
       </NavItems>
@@ -109,7 +100,7 @@ const Logo = styled.h1`
 const NavItems = styled.ul`
   list-style: none;
   align-self: stretch;
-  margin: auto 0;
+
   display: flex;
   align-items: center;
   gap: 40px;
@@ -124,18 +115,36 @@ const NavItems = styled.ul`
     width: 100%;
     text-align: center;
     display: block;
-    transition: all 0.3s ease;
   }
 `;
 
 const NavItem = styled.li`
-  padding: 8px;
-  transition-duration: 167ms;
+  height: 100%;
+  width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  :hover {
+    border-bottom: 2px solid #000;
+  }
+
+  :active {
+    color: #9747ff;
+    transform: scale(0.99);
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    margin: 40px 0;
+  }
 
   a {
     font-size: 20px;
     font-family: "Inter", sans-serif;
     text-transform: capitalize;
+    padding: 8px;
 
     @media screen and (max-width: 767px) {
       width: 100%;
@@ -150,17 +159,6 @@ const NavItem = styled.li`
         background: none;
       }
     }
-  }
-
-  :hover,
-  :active {
-    background-color: #303030;
-    color: #fff;
-  }
-
-  @media screen and (max-width: 767px) {
-    width: 100%;
-    margin: 40px 0;
   }
 `;
 
