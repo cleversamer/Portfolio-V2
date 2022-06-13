@@ -4,7 +4,7 @@ const Avatar = () => {
   return (
     <Container>
       <Rectangle />
-      <AvatarImg src="/assets/avatar.jpg" alt="Samer" />
+      <AvatarImg src="/assets/new-avatar.jpg" alt="Samer" />
     </Container>
   );
 };
@@ -13,6 +13,7 @@ const Container = styled.section`
   margin-right: 20px;
 
   @media screen and (max-width: 767px) {
+    margin-right: 0;
     margin-top: -20px;
   }
 `;
