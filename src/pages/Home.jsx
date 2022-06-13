@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import SocialLinks from "../components/SocialLinks";
 
 const Home = () => {
   return (
     <Container>
-      <h1>Home</h1>
+      <SocialLinks />
     </Container>
   );
 };
