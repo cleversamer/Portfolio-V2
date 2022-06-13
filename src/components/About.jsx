@@ -16,7 +16,7 @@ const About = () => {
         you can trust me in your business.
       </Paragraph>
 
-      <Resume href="/assets/resume.pdf" className="click-animation-2">
+      <Resume download href="assets/resume.pdf" className="click-animation-2">
         View my resume
       </Resume>
     </Container>
