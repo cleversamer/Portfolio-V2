@@ -9,7 +9,13 @@ const Avatar = () => {
   );
 };
 
-const Container = styled.section``;
+const Container = styled.section`
+  margin-right: 20px;
+
+  @media screen and (max-width: 767px) {
+    margin-top: -20px;
+  }
+`;
 
 const Rectangle = styled.div`
   width: 150px;
@@ -24,9 +30,11 @@ const Rectangle = styled.div`
 `;
 
 const AvatarImg = styled.img`
-  width: 300px;
+  width: 25vw;
+  min-width: 250px;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+  cursor: pointer;
 `;
 
 export default Avatar;

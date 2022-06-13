@@ -54,6 +54,10 @@ const Navbar = () => {
 };
 
 const Container = styled.nav`
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
   padding: 0 16px;
   height: 64px;
@@ -64,7 +68,7 @@ const Container = styled.nav`
   input[type="checkbox"] {
     display: none;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       :checked ~ ul {
         left: 0;
       }
@@ -84,7 +88,7 @@ const Container = styled.nav`
       display: none;
       font-size: 26px;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 767px) {
         display: block;
       }
     }
@@ -109,8 +113,9 @@ const NavItems = styled.ul`
   display: flex;
   align-items: center;
   gap: 40px;
+  z-index: 999;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     position: fixed;
     top: 64px;
     left: -100%;
@@ -132,7 +137,7 @@ const NavItem = styled.li`
     font-family: "Inter", sans-serif;
     text-transform: capitalize;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       width: 100%;
       margin-left: -100%;
       display: block;
@@ -153,7 +158,7 @@ const NavItem = styled.li`
     color: #fff;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     width: 100%;
     margin: 40px 0;
   }

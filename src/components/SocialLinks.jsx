@@ -52,11 +52,19 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  margin-right: 40px;
+  margin-top: 70px;
 
   .big-image {
     width: 36px;
     height: 36px;
     object-fit: contain;
+  }
+
+  @media screen and (max-width: 767px) {
+    flex-direction: row;
+    margin: 0;
+    margin-top: 30px;
   }
 `;
 
