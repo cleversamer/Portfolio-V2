@@ -55,7 +55,7 @@ const Skills = () => {
       <Content>
         <Heading
           title="technical skills"
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae, veniam est. Dolorem et voluptate delectus expedita nemo sunt, voluptatum obcaecati id aperiam doloremque ea possimus architecto suscipit est odio quis cupiditate molestiae voluptas nam maxime excepturi sit dicta laboriosam? Suscipit."
+          description="This page shows my technical skills and the tech stack that I use to build web applications."
         />
 
         <List>
