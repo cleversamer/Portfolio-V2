@@ -9,7 +9,7 @@ const Navbar = ({ page }) => {
 
   return (
     <Container>
-      <Link to="/" className={` ${page === "home" && "selected"}`}>
+      <Link to="/">
         <Logo>samer</Logo>
       </Link>
 
@@ -65,20 +65,10 @@ const Container = styled.nav`
   align-items: center;
   justify-content: space-between;
 
-  @media screen and (min-width: 768px) {
-    .selected {
-      border-bottom: 2px solid #000;
-    }
-
-    > a {
-      height: 64px;
-      display: flex;
-      align-items: center;
-
-      :hover {
-        border-bottom: 2px solid #000;
-      }
-    }
+  > a {
+    height: 64px;
+    display: flex;
+    align-items: center;
   }
 
   input[type="checkbox"] {

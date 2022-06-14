@@ -24,7 +24,9 @@ const Container = styled.div`
 const Title = styled.h2`
   text-transform: capitalize;
   font-size: 48px;
+  width: 100%;
   min-width: fit-content;
+  text-align: center;
 
   @media screen and (max-width: 767px) {
     font-size: 36px;
