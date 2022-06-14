@@ -4,7 +4,7 @@ const About = () => {
   return (
     <Container>
       <Heading>
-        Hi, I'm Samer A.
+        Hi, I’m Samer A.
         <br />
         I’m a <Highlight>Software engineer</Highlight>
       </Heading>
@@ -27,10 +27,6 @@ const Container = styled.section`
   font-family: "Inter", sans-serif;
   margin: auto 0;
 
-  @media screen and (max-width: 1440px) {
-    /*  */
-  }
-
   @media screen and (max-width: 767px) {
     display: flex;
     flex-direction: column;
@@ -42,7 +38,8 @@ const Container = styled.section`
 const Heading = styled.h2`
   font-size: 58px;
   margin-bottom: 10px;
-  width: fit-content;
+  width: 100%;
+  min-width: max-content;
 
   @media screen and (max-width: 1440px) {
     font-size: 34px;

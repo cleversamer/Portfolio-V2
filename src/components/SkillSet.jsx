@@ -34,7 +34,7 @@ const Container = styled.section`
 const Heading = styled.h2`
   text-transform: capitalize;
   width: 100%;
-  min-width: fit-content;
+  min-width: max-content;
   text-align: center;
 
   @media screen and (max-width: 820px) {
