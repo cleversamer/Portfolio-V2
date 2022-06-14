@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { TbMenu } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io";
 
-const Navbar = () => {
+const Navbar = ({ page }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <Container>
-      <Link to="/" className="click-animation-2">
+      <Link to="/" className={` ${page === "home" && "selected"}`}>
         <Logo>samer</Logo>
       </Link>
 
@@ -28,15 +28,24 @@ const Navbar = () => {
       </label>
 
       <NavItems>
-        <NavItem onClick={() => setShowMenu(false)}>
+        <NavItem
+          className={page === "skills" && "selected"}
+          onClick={() => setShowMenu(false)}
+        >
           <Link to="/skills">skills</Link>
         </NavItem>
 
-        <NavItem onClick={() => setShowMenu(false)}>
+        <NavItem
+          className={page === "portfolio" && "selected"}
+          onClick={() => setShowMenu(false)}
+        >
           <Link to="/portfolio">portfolio</Link>
         </NavItem>
 
-        <NavItem onClick={() => setShowMenu(false)}>
+        <NavItem
+          className={page === "events" && "selected"}
+          onClick={() => setShowMenu(false)}
+        >
           <Link to="/events">events</Link>
         </NavItem>
       </NavItems>
@@ -55,6 +64,22 @@ const Container = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  > a {
+    height: 64px;
+    display: flex;
+    align-items: center;
+
+    :hover {
+      border-bottom: 2px solid #000;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .selected {
+      border-bottom: 2px solid #000;
+    }
+  }
 
   input[type="checkbox"] {
     display: none;
