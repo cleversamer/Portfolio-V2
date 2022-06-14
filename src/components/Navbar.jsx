@@ -71,6 +71,12 @@ const Container = styled.nav`
     align-items: center;
   }
 
+  @media screen and (min-width: 768px) {
+    .selected {
+      color: #9747ff;
+    }
+  }
+
   input[type="checkbox"] {
     display: none;
 
@@ -143,11 +149,6 @@ const NavItem = styled.li`
 
   :hover {
     border-bottom: 2px solid #000;
-  }
-
-  :active {
-    color: #9747ff;
-    transform: scale(0.99);
   }
 
   @media screen and (max-width: 767px) {
