@@ -33,15 +33,12 @@ const Container = styled.section`
 
 const Heading = styled.h2`
   text-transform: capitalize;
-  width: auto;
+  width: 100%;
   min-width: fit-content;
+  text-align: center;
 
   @media screen and (max-width: 820px) {
     font-size: 20px;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 16px;
   }
 `;
 
