@@ -17,7 +17,7 @@ const App = () => {
 
         updateDoc(usersInfoDocRef, {
           visitors: newVisitors,
-          lastVisit: new Date().toDateString(),
+          lastVisit: `${new Date().toDateString()} at ${new Date().toTimeString()}`,
         })
           .then(() => {})
           .catch((err) => {
