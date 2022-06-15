@@ -1,12 +1,22 @@
+import { useState, useEffect } from "react";
+import { onSnapshot } from "firebase/firestore";
+import { skillSetsQuery } from "../firebase";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import SkillSet from "../components/SkillSet";
 import List from "../components/List";
 import Heading from "../components/Heading";
 
-import { getSkillSets } from "../data";
-
 const Skills = () => {
+  const [skillSets, setSkillSets] = useState([]);
+
+  useEffect(() => {
+    onSnapshot(skillSetsQuery, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setSkillSets(data);
+    });
+  }, []);
+
   return (
     <Container>
       <Navbar page="skills" />
@@ -18,8 +28,8 @@ const Skills = () => {
         />
 
         <List>
-          {getSkillSets().map((skillSet) => (
-            <SkillSet id={skillSet.id} skillSet={skillSet} />
+          {skillSets.map((skillSet) => (
+            <SkillSet key={skillSet.id} skillSet={skillSet} />
           ))}
         </List>
       </Content>

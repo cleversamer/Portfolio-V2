@@ -7,7 +7,7 @@ const SkillSet = ({ skillSet }) => {
 
       <Skills>
         {skillSet.set.map((skill) => (
-          <li key={skill.id}>{skill.title}</li>
+          <li key={skill.title}>{skill.title}</li>
         ))}
       </Skills>
     </Container>

@@ -2,9 +2,9 @@ import styled from "styled-components";
 import Badge from "./Badge";
 import { AiOutlineEye, AiFillGithub } from "react-icons/ai";
 
-const props = (props) => {
+const Project = ({ project }) => {
   const mapTechStackToView = () => {
-    let skills = [...props.techStack];
+    let skills = [...project.techStack];
     if (skills.length > 4) {
       skills = [...skills.slice(0, 3), { title: `+${skills.length - 3}` }];
     }
@@ -14,9 +14,9 @@ const props = (props) => {
 
   return (
     <Container>
-      <Image src={props?.imageURL} alt={props?.title} />
+      <Image src={project?.imageURL} alt={project?.title} />
 
-      <Title>{props?.title}</Title>
+      <Title>{project?.title}</Title>
 
       <TechStack>
         {mapTechStackToView().map((tech) => (
@@ -24,15 +24,15 @@ const props = (props) => {
         ))}
       </TechStack>
 
-      <Description>{props.description}</Description>
+      <Description>{project.description}</Description>
 
       <Resources>
-        <Preview href={props.appURL} target="_blank" rel="noreferrer">
+        <Preview href={project.appURL} target="_blank" rel="noreferrer">
           <span>Preview</span>
           <AiOutlineEye />
         </Preview>
 
-        <GitHub href={props.sourceURL} target="_blank" rel="noreferrer">
+        <GitHub href={project.sourceURL} target="_blank" rel="noreferrer">
           <span>Source code</span>
           <AiFillGithub />
         </GitHub>
@@ -125,4 +125,4 @@ const GitHub = styled(Button)`
   border: 2px solid #000;
 `;
 
-export default props;
+export default Project;

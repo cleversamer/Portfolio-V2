@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { getSkills } from "../store/skills";
-import { getProjects } from "../store/projects";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
+import { onSnapshot } from "firebase/firestore";
+import { skillsQuery, projectsQuery } from "../firebase";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Heading from "../components/Heading";
@@ -9,12 +9,25 @@ import Badge from "../components/Badge";
 import Project from "../components/Project";
 
 const Portfolio = () => {
-  const skills = useSelector(getSkills);
-  const projects = useSelector(getProjects);
-  const [badges, setBadges] = useState([...skills]);
+  const [projects, setProjects] = useState([]);
+  const [badges, setBadges] = useState([]);
+
+  useEffect(() => {
+    onSnapshot(skillsQuery, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setBadges([...data]);
+    });
+  }, []);
+
+  useEffect(() => {
+    onSnapshot(projectsQuery, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setProjects(data);
+    });
+  }, []);
 
   const handleBadgeClick = (badge) => {
-    let items = [...skills];
+    let items = [...badges];
 
     if (badge.title === "All") {
       items = items.map((i) => ({ ...i, selected: false }));
@@ -47,7 +60,7 @@ const Portfolio = () => {
         />
 
         <Badges>
-          {badges.map((badge) => (
+          {badges?.map((badge) => (
             <Badge
               key={badge.title}
               badge={badge}
@@ -57,8 +70,8 @@ const Portfolio = () => {
         </Badges>
 
         <Projects>
-          {projects.map((project) => (
-            <Project key={project.id} {...project} />
+          {projects?.map((project) => (
+            <Project key={project.id} project={project} />
           ))}
         </Projects>
       </Content>
