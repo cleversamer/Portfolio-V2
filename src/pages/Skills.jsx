@@ -16,7 +16,7 @@ const Skills = () => {
       setSkillSets(data);
     });
 
-    unsubscribe();
+    return unsubscribe;
   }, []);
 
   return (

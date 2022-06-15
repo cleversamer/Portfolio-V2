@@ -18,7 +18,7 @@ const Portfolio = () => {
       setBadges([...data]);
     });
 
-    unsubscribe();
+    return unsubscribe;
   }, []);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Portfolio = () => {
       setProjects(data);
     });
 
-    unsubscribe();
+    return unsubscribe;
   }, []);
 
   const handleBadgeClick = (badge) => {
