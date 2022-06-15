@@ -11,10 +11,12 @@ const Skills = () => {
   const [skillSets, setSkillSets] = useState([]);
 
   useEffect(() => {
-    onSnapshot(skillSetsQuery, (snapshot) => {
+    const unsubscribe = onSnapshot(skillSetsQuery, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setSkillSets(data);
     });
+
+    unsubscribe();
   }, []);
 
   return (

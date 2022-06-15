@@ -13,17 +13,21 @@ const Portfolio = () => {
   const [badges, setBadges] = useState([]);
 
   useEffect(() => {
-    onSnapshot(skillsQuery, (snapshot) => {
+    const unsubscribe = onSnapshot(skillsQuery, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setBadges([...data]);
     });
+
+    unsubscribe();
   }, []);
 
   useEffect(() => {
-    onSnapshot(projectsQuery, (snapshot) => {
+    const unsubscribe = onSnapshot(projectsQuery, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setProjects(data);
     });
+
+    unsubscribe();
   }, []);
 
   const handleBadgeClick = (badge) => {
