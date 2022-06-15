@@ -66,7 +66,7 @@ export const getSkillSets = () => {
 };
 
 export const getSkills = () => {
-  return skills.filter((skill) => !skill.visible);
+  return skills;
 };
 
 export const getProjects = () => {

@@ -1,17 +1,20 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { getSkills } from "../store/skills";
+import { getProjects } from "../store/projects";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Heading from "../components/Heading";
 import Badge from "../components/Badge";
 import Project from "../components/Project";
 
-import { getSkills, getProjects } from "../data";
-
 const Portfolio = () => {
-  const [badges, setBadges] = useState(getSkills());
+  const skills = useSelector(getSkills);
+  const projects = useSelector(getProjects);
+  const [badges, setBadges] = useState([...skills]);
 
   const handleBadgeClick = (badge) => {
-    let items = [...badges];
+    let items = [...skills];
 
     if (badge.title === "All") {
       items = items.map((i) => ({ ...i, selected: false }));
@@ -54,7 +57,7 @@ const Portfolio = () => {
         </Badges>
 
         <Projects>
-          {getProjects().map((project) => (
+          {projects.map((project) => (
             <Project key={project.id} {...project} />
           ))}
         </Projects>
