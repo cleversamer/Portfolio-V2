@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, orderBy } from "firebase/firestore";
 
 const config = {
-  apiKey: "AIzaSyBalq8d3cMY8v3vFSdx0MbGyj_Tg9uj8qM",
+  apiKey: process.env["REACT_APP_FIREBASE_API_KEY"],
   authDomain: "cleversamer.firebaseapp.com",
   projectId: "cleversamer",
   storageBucket: "cleversamer.appspot.com",
