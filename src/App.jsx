@@ -19,6 +19,8 @@ const App = () => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: hidden;
+`;
 
 export default App;

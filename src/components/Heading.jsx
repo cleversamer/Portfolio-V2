@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Heading = ({ title, description }) => {
   return (
-    <Container>
+    <Container className="heading">
       <Title>{title}</Title>
       <Description>{description}</Description>
     </Container>
@@ -10,7 +10,6 @@ const Heading = ({ title, description }) => {
 };
 
 const Container = styled.div`
-  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,6 +42,10 @@ const Description = styled.p`
   font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.8);
+
+  @media screen and (min-width: 768px) {
+    margin: 0 10vw;
+  }
 
   @media screen and (max-width: 480px) {
     font-size: 15px;
