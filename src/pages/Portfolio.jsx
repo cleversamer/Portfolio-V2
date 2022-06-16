@@ -2,15 +2,19 @@
 import { useState, useEffect } from "react";
 import { onSnapshot } from "firebase/firestore";
 import { skillsQuery, projectsQuery } from "../firebase";
+import { paginate } from "../utilities/paginate";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Heading from "../components/Heading";
 import Badge from "../components/Badge";
 import Project from "../components/Project";
+import Pagination from "../components/Pagination";
 
 const Portfolio = () => {
   const [projects, setProjects] = useState([]);
   const [badges, setBadges] = useState([]);
+  const [pageSize, setPageSize] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(skillsQuery, (snapshot) => {
@@ -40,42 +44,34 @@ const Portfolio = () => {
     let bList = [...badges];
     let pList = [...projects];
 
-    if (badge.title === "All") {
-      bList = bList.map((i) => ({ ...i, selected: false }));
-      bList[0].selected = true;
-      pList = pList.map((p) => ({ ...p, visible: true }));
-    } else {
-      const index = bList.findIndex((i) => i.title === badge.title);
-      bList[index].selected = !bList[index].selected;
+    bList = bList.map((i) => ({ ...i, selected: i.title === badge.title }));
 
-      pList = pList.map((p) => {
-        const skills = [...p.techStack];
-        for (let i = 0; i < skills.length; i++) {
-          if (skills[i].title === badge.title) {
-            return { ...p, visible: bList[index].selected };
-          }
-        }
+    pList =
+      badge.title === "All"
+        ? pList.map((p) => ({ ...p, visible: true }))
+        : pList.map((p) => {
+            let skills = [...p.techStack];
+            for (let i = 0; i < skills.length; i++) {
+              if (skills[i].title === badge.title) {
+                return { ...p, visible: true };
+              }
+            }
 
-        return { ...p, visible: false };
-      });
+            return { ...p, visible: false };
+          });
 
-      const allSelected =
-        bList.filter((i) => i.selected).length === bList.length - 1;
-
-      if (allSelected) {
-        bList = bList.map((i) => ({ ...i, selected: false }));
-      }
-
-      bList[0].selected = allSelected;
-    }
-
+    setCurrentPage(1);
     setBadges(bList);
     setProjects(pList);
   };
 
-  const getDisplayProject = () => {
-    return projects.filter((p) => p.visible);
+  const getPagedProjects = () => {
+    const filtered = projects.filter((p) => p.visible);
+    const paged = paginate(filtered, currentPage, pageSize);
+    return { itemsCount: filtered.length, data: paged };
   };
+
+  const { itemsCount, data } = getPagedProjects();
 
   return (
     <Container>
@@ -98,10 +94,17 @@ const Portfolio = () => {
         </Badges>
 
         <Projects>
-          {getDisplayProject().map((project) => (
+          {data.map((project) => (
             <Project key={project.id} project={project} />
           ))}
         </Projects>
+
+        <Pagination
+          itemsCount={itemsCount}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
       </Content>
     </Container>
   );
