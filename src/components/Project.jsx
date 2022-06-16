@@ -106,8 +106,12 @@ const Button = styled.a`
     font-size: 15px;
     font-weight: 500;
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 480px) {
       font-size: 14px;
+    }
+
+    @media screen and (max-width: 380px) {
+      font-size: 13px;
     }
   }
 `;
