@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Skills from "./pages/Skills";
 import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
+import Events from "./pages/Events";
 
 const App = () => {
   useEffect(() => {
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <Container>
       <Routes>
+        <Route path="/events" element={<Events />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/skills" element={<Skills />} />
         <Route path="/not-found" element={<NotFound />} />
