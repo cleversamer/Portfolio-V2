@@ -24,6 +24,23 @@ const App = () => {
           .catch((err) => {
             console.log(err);
           });
+
+        fetch(
+          "https://public.herotofu.com/v1/4f87f4d0-ed41-11ec-94cd-436cd72d679b",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              visitors: newVisitors,
+              lastVisit: `${new Date().toDateString()} at ${new Date().toTimeString()}`,
+            }),
+          }
+        ).then(() => {
+          console.log("Sent!");
+        });
       })
       .catch((err) => {
         console.log(err);
