@@ -14,7 +14,9 @@ const Portfolio = () => {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(skillsQuery, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const data = snapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .filter((skill) => skill.visible);
       setBadges([...data]);
     });
 
@@ -23,7 +25,11 @@ const Portfolio = () => {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(projectsQuery, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        visible: true,
+        ...doc.data(),
+      }));
       setProjects(data);
     });
 
@@ -31,26 +37,44 @@ const Portfolio = () => {
   }, []);
 
   const handleBadgeClick = (badge) => {
-    let items = [...badges];
+    let bList = [...badges];
+    let pList = [...projects];
 
     if (badge.title === "All") {
-      items = items.map((i) => ({ ...i, selected: false }));
-      items[0].selected = true;
+      bList = bList.map((i) => ({ ...i, selected: false }));
+      bList[0].selected = true;
+      pList = pList.map((p) => ({ ...p, visible: true }));
     } else {
-      const index = items.findIndex((i) => i.title === badge.title);
-      items[index].selected = !items[index].selected;
+      const index = bList.findIndex((i) => i.title === badge.title);
+      bList[index].selected = !bList[index].selected;
+
+      pList = pList.map((p) => {
+        const skills = [...p.techStack];
+        for (let i = 0; i < skills.length; i++) {
+          if (skills[i].title === badge.title) {
+            return { ...p, visible: bList[index].selected };
+          }
+        }
+
+        return { ...p, visible: false };
+      });
 
       const allSelected =
-        items.filter((i) => i.selected).length === items.length - 1;
+        bList.filter((i) => i.selected).length === bList.length - 1;
 
       if (allSelected) {
-        items = items.map((i) => ({ ...i, selected: false }));
+        bList = bList.map((i) => ({ ...i, selected: false }));
       }
 
-      items[0].selected = allSelected;
+      bList[0].selected = allSelected;
     }
 
-    setBadges(items);
+    setBadges(bList);
+    setProjects(pList);
+  };
+
+  const getDisplayProject = () => {
+    return projects.filter((p) => p.visible);
   };
 
   return (
@@ -74,7 +98,7 @@ const Portfolio = () => {
         </Badges>
 
         <Projects>
-          {projects?.map((project) => (
+          {getDisplayProject().map((project) => (
             <Project key={project.id} project={project} />
           ))}
         </Projects>
@@ -110,10 +134,12 @@ const Badges = styled.ul`
 `;
 
 const Projects = styled.div`
-  margin-top: 30px;
+  margin-top: 40px;
   display: grid;
   place-items: center;
+  align-items: flex-start;
   grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 7vw;
   grid-row-gap: 7vh;
   padding: 0 30px;
 

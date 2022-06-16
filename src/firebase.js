@@ -26,5 +26,5 @@ const projectsRef = collection(db, "projects");
 
 export const skillsQuery = query(skillsRef, orderBy("order", "asc"));
 export const skillSetsQuery = query(skillSetsRef, orderBy("order", "asc"));
-export const projectsQuery = query(projectsRef, orderBy("order", "asc"));
+export const projectsQuery = query(projectsRef, orderBy("order", "desc"));
 export const usersInfoDocRef = doc(db, "users", "amh3EALGMDD1QbGME4yd");
