@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { onSnapshot } from "firebase/firestore";
-import config from "../config.json";
+import config from "../config";
 import { skillsQuery, projectsQuery } from "../firebase";
 import { paginate } from "../utilities/paginate";
 import styled from "styled-components";
