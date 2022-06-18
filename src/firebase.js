@@ -1,11 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  query,
-  orderBy,
-  doc,
-} from "firebase/firestore";
+import { getFirestore, collection, query, orderBy } from "firebase/firestore";
 
 const config = {
   apiKey: process.env["REACT_APP_FIREBASE_API_KEY"],
@@ -23,8 +17,8 @@ const db = getFirestore();
 const skillsRef = collection(db, "skills");
 const skillSetsRef = collection(db, "skillSets");
 const projectsRef = collection(db, "projects");
+export const visitorsRef = collection(db, "visitors");
 
 export const skillsQuery = query(skillsRef, orderBy("order", "asc"));
 export const skillSetsQuery = query(skillSetsRef, orderBy("order", "asc"));
 export const projectsQuery = query(projectsRef, orderBy("order", "desc"));
-export const usersInfoDocRef = doc(db, "users", "amh3EALGMDD1QbGME4yd");

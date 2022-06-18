@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { updateDoc, getDoc } from "firebase/firestore";
-import { usersInfoDocRef } from "./firebase";
+import axios from "axios";
+import { addDoc, serverTimestamp } from "firebase/firestore";
+import { visitorsRef } from "./firebase";
 import styled from "styled-components";
 import Home from "./pages/Home";
 import Skills from "./pages/Skills";
@@ -11,41 +12,40 @@ import Events from "./pages/Events";
 
 const App = () => {
   useEffect(() => {
-    getDoc(usersInfoDocRef)
-      .then((result) => {
-        const doc = result._document.data.value.mapValue.fields;
-        const newVisitors = parseInt(doc.visitors.integerValue) + 1;
+    axios
+      .get("https://geolocation-db.com/json/")
+      .then((res) => {
+        const currentDate = new Date();
 
-        updateDoc(usersInfoDocRef, {
-          visitors: newVisitors,
-          lastVisit: `${new Date().toDateString()} at ${new Date().toTimeString()}`,
-        })
-          .then(() => {})
-          .catch((err) => {
-            console.log(err);
-          });
-
-        fetch(
-          "https://public.herotofu.com/v1/4f87f4d0-ed41-11ec-94cd-436cd72d679b",
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              visitors: newVisitors,
-              lastVisit: `${new Date().toDateString()} at ${new Date().toTimeString()}`,
-            }),
-          }
-        ).then(() => {
-          console.log("Sent!");
+        addDoc(visitorsRef, {
+          visitDate: currentDate.toDateString(),
+          visitTime: currentDate.toTimeString(),
+          visitorData: res.data,
+          timestamp: serverTimestamp(),
         });
+
+        sendEmail(currentDate);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => {});
   }, []);
+
+  const sendEmail = (date) => {
+    const URL = `https://public.herotofu.com/v1/${process.env["REACT_APP_HEROTOFU_API_KEY"]}`;
+    const body = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        lastVisit: `${date.toDateString()} at ${date.toTimeString()}`,
+      }),
+    };
+
+    fetch(URL, body)
+      .then(() => {})
+      .catch(() => {});
+  };
 
   return (
     <Container>
