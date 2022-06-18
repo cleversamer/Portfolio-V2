@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
+import sendEmail from "./services/sendEmail";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import { visitorsRef } from "./firebase";
 import styled from "styled-components";
@@ -24,28 +25,12 @@ const App = () => {
           timestamp: serverTimestamp(),
         });
 
-        sendEmail(currentDate);
+        sendEmail({
+          lastVisit: `${currentDate.toDateString()} at ${currentDate.toTimeString()}`,
+        });
       })
       .catch(() => {});
   }, []);
-
-  const sendEmail = (date) => {
-    const URL = `https://public.herotofu.com/v1/${process.env["REACT_APP_HEROTOFU_API_KEY"]}`;
-    const body = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        lastVisit: `${date.toDateString()} at ${date.toTimeString()}`,
-      }),
-    };
-
-    fetch(URL, body)
-      .then(() => {})
-      .catch(() => {});
-  };
 
   return (
     <Container>
