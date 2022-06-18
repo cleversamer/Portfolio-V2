@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { onSnapshot } from "firebase/firestore";
+import config from "../config.json";
 import { skillsQuery, projectsQuery } from "../firebase";
 import { paginate } from "../utilities/paginate";
 import styled from "styled-components";
@@ -13,7 +14,6 @@ import Pagination from "../components/Pagination";
 const Portfolio = () => {
   const [projects, setProjects] = useState([]);
   const [badges, setBadges] = useState([]);
-  const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const Portfolio = () => {
 
   const getPagedProjects = () => {
     const filtered = projects.filter((p) => p.visible);
-    const paged = paginate(filtered, currentPage, pageSize);
+    const paged = paginate(filtered, currentPage, config.projectsPageSize);
     return { itemsCount: filtered.length, data: paged };
   };
 
@@ -101,8 +101,8 @@ const Portfolio = () => {
 
         <Pagination
           itemsCount={itemsCount}
-          pageSize={pageSize}
           currentPage={currentPage}
+          pageSize={config.projectsPageSize}
           onPageChange={setCurrentPage}
         />
       </Content>

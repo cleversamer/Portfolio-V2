@@ -77,11 +77,11 @@ const Resume = styled.a`
   border-radius: 10px;
   width: 180px;
   text-align: center;
+  transition-duration: 167ms;
 
   :hover,
   :active {
-    background-color: #000;
-    color: #fff;
+    color: #9747ff;
   }
 `;
 
