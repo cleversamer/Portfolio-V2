@@ -127,7 +127,6 @@ const Badges = styled.ul`
   display: flex;
   gap: 10px;
   padding: 0 30px;
-
   @media screen and (min-width: 768px) {
     flex-wrap: wrap;
     width: fit-content;
@@ -145,7 +144,6 @@ const Projects = styled.div`
   grid-column-gap: 7vw;
   grid-row-gap: 7vh;
   padding: 0 30px;
-
   @media screen and (max-width: 767px) {
     grid-template-columns: repeat(1, 1fr);
   }

@@ -6,14 +6,14 @@ const About = () => {
       <Heading>
         Hi, I’m Samer A.
         <br />
-        I’m a <Highlight>Software engineer</Highlight>
+        I’m a <Highlight>Front-end developer</Highlight>
       </Heading>
 
       <Paragraph>
-        I'm a passionate computer science student with strong knowledge and
-        experience in web development, and with almost 3-years of experience, I
-        can help you to make your own web application in a professional way, and
-        you can trust me in your business.
+        I’m a passionate web developer with strong knowledge and experience in
+        Front-end development, and with 2+ years of experience, I can help you
+        build your web application professionally, and achieve your business
+        goals.
       </Paragraph>
 
       <Resume download href="assets/resume.pdf" className="click-animation-2">
@@ -55,6 +55,7 @@ const Heading = styled.h2`
 const Highlight = styled.span`
   background-color: #303030;
   color: #fff;
+  text-transform: capitalize;
 `;
 
 const Paragraph = styled.p`
