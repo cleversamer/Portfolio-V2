@@ -12,7 +12,7 @@ const Avatar = () => {
 const Container = styled.section`
   margin-right: 20px;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     margin-right: 0;
     margin-top: -20px;
   }

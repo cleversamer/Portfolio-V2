@@ -12,7 +12,9 @@ const Skills = () => {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(skillSetsQuery, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const data = snapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .filter((doc) => doc.visible);
       setSkillSets(data);
     });
 

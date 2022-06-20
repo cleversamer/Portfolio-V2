@@ -6,14 +6,14 @@ const About = () => {
       <Heading>
         Hi, I’m Samer A.
         <br />
-        I’m a <Highlight>Front-end developer</Highlight>
+        I’m a <Highlight>Software engineer</Highlight>
       </Heading>
 
       <Paragraph>
-        I’m a passionate web developer with strong knowledge and experience in
-        Front-end development, and with 2+ years of experience, I can help you
-        build your web application professionally, and achieve your business
-        goals.
+        I am a software engineer with 3+ years of experience in programming, and
+        I have a solid understanding of JavaScript and its frameworks. I have
+        excellent experience in building and developing scalable, maintainable,
+        and high-performance applications.
       </Paragraph>
 
       <Resume download href="assets/resume.pdf" className="click-animation-2">
@@ -27,7 +27,7 @@ const Container = styled.section`
   font-family: "Inter", sans-serif;
   margin: auto 0;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +45,7 @@ const Heading = styled.h2`
     font-size: 34px;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     font-size: 26px;
     text-align: center;
     margin-bottom: 15px;
@@ -65,7 +65,7 @@ const Paragraph = styled.p`
   margin-bottom: 32px;
   width: fit-content;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     font-size: 14px;
     text-align: center;
   }

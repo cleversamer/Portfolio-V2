@@ -39,6 +39,18 @@ const SocialLinks = () => {
         <img src="/assets/linkedin.svg" alt="LinkedIn logo" />
       </a>
 
+      <a
+        href="https://www.upwork.com/freelancers/~015fe962fca7326506"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src="/assets/upwork.svg"
+          alt="Upwork logo"
+          className="medium-image"
+        />
+      </a>
+
       <a href="mailto:thedev.samer@gmail.com" target="_blank" rel="noreferrer">
         <img src="/assets/gmail.png" alt="Gmail logo" className="big-image" />
       </a>
@@ -61,7 +73,13 @@ const Container = styled.section`
     object-fit: contain;
   }
 
-  @media screen and (max-width: 767px) {
+  .medium-image {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 768px) {
     flex-direction: row;
     margin: 0;
     margin-top: 30px;

@@ -26,7 +26,7 @@ const Content = styled.main`
   align-items: center;
   padding: 0 10vw;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
     padding-bottom: 30px;
   }
