@@ -1,6 +1,23 @@
 import styled from "styled-components";
+import { actionsRef } from "../firebase";
+import { addDoc, serverTimestamp } from "firebase/firestore";
+import getVisitorData from "../services/getVisitorData";
 
 const About = () => {
+  const handleResumeClick = () => {
+    getVisitorData((res) => {
+      const currentDate = new Date();
+
+      addDoc(actionsRef, {
+        author: res.data,
+        actionDate: currentDate.toDateString(),
+        actionTime: currentDate.toTimeString(),
+        description: `Viewed your resume.`,
+        timestamp: serverTimestamp(),
+      });
+    });
+  };
+
   return (
     <Container>
       <Heading>
@@ -16,7 +33,12 @@ const About = () => {
         and high-performance applications.
       </Paragraph>
 
-      <Resume download href="assets/resume.pdf" className="click-animation-2">
+      <Resume
+        download
+        href="assets/resume.pdf"
+        className="click-animation-2"
+        onClick={handleResumeClick}
+      >
         View my resume
       </Resume>
     </Container>

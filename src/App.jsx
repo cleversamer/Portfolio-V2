@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import axios from "axios";
+import getVisitorData from "./services/getVisitorData";
 import sendEmail from "./services/sendEmail";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import { visitorsRef } from "./firebase";
@@ -13,23 +13,20 @@ import Events from "./pages/Events";
 
 const App = () => {
   useEffect(() => {
-    axios
-      .get("https://geolocation-db.com/json/")
-      .then((res) => {
-        const currentDate = new Date();
+    getVisitorData((res) => {
+      const currentDate = new Date();
 
-        addDoc(visitorsRef, {
-          visitDate: currentDate.toDateString(),
-          visitTime: currentDate.toTimeString(),
-          visitorData: res.data,
-          timestamp: serverTimestamp(),
-        });
+      addDoc(visitorsRef, {
+        visitDate: currentDate.toDateString(),
+        visitTime: currentDate.toTimeString(),
+        visitorData: res.data,
+        timestamp: serverTimestamp(),
+      });
 
-        sendEmail({
-          lastVisit: `${currentDate.toDateString()} at ${currentDate.toTimeString()}`,
-        });
-      })
-      .catch(() => {});
+      sendEmail({
+        lastVisit: `${currentDate.toDateString()} at ${currentDate.toTimeString()}`,
+      });
+    });
   }, []);
 
   return (

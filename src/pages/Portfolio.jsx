@@ -17,25 +17,41 @@ const Portfolio = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(skillsQuery, (snapshot) => {
-      const data = snapshot.docs
-        .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .filter((skill) => skill.visible);
-      setBadges([...data]);
-    });
+    const unsubscribe = onSnapshot(
+      skillsQuery,
+      (snapshot) => {
+        const data = snapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .filter((skill) => skill.visible);
+        setBadges([...data]);
+      },
+      (err) => {
+        alert(
+          `An error was occurred when fetching skills from the database.\n${err.code}: ${err.message}`
+        );
+      }
+    );
 
     return unsubscribe;
   }, []);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(projectsQuery, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        visible: true,
-        ...doc.data(),
-      }));
-      setProjects(data);
-    });
+    const unsubscribe = onSnapshot(
+      projectsQuery,
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          visible: true,
+          ...doc.data(),
+        }));
+        setProjects(data);
+      },
+      (err) => {
+        alert(
+          `An error was occurred when fetching projects from the database.\n${err.code}: ${err.message}`
+        );
+      }
+    );
 
     return unsubscribe;
   }, []);

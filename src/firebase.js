@@ -18,7 +18,10 @@ const skillsRef = collection(db, "skills");
 const skillSetsRef = collection(db, "skillSets");
 const projectsRef = collection(db, "projects");
 export const visitorsRef = collection(db, "visitors");
+export const actionsRef = collection(db, "actions");
 
 export const skillsQuery = query(skillsRef, orderBy("order", "asc"));
 export const skillSetsQuery = query(skillSetsRef, orderBy("order", "asc"));
 export const projectsQuery = query(projectsRef, orderBy("order", "desc"));
+
+export default db;

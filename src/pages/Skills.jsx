@@ -11,12 +11,20 @@ const Skills = () => {
   const [skillSets, setSkillSets] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(skillSetsQuery, (snapshot) => {
-      const data = snapshot.docs
-        .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .filter((doc) => doc.visible);
-      setSkillSets(data);
-    });
+    const unsubscribe = onSnapshot(
+      skillSetsQuery,
+      (snapshot) => {
+        const data = snapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .filter((doc) => doc.visible);
+        setSkillSets(data);
+      },
+      (err) => {
+        alert(
+          `An error was occurred when fetching skills from the database.\n${err.code}: ${err.message}`
+        );
+      }
+    );
 
     return unsubscribe;
   }, []);

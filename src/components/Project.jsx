@@ -1,4 +1,13 @@
 import styled from "styled-components";
+import firestore, { actionsRef } from "../firebase";
+import {
+  doc,
+  addDoc,
+  getDoc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import getVisitorData from "../services/getVisitorData";
 import Badge from "./Badge";
 import { AiOutlineEye, AiFillGithub } from "react-icons/ai";
 
@@ -10,6 +19,36 @@ const Project = ({ project }) => {
     }
 
     return skills;
+  };
+
+  const handleProjectClick = (name, link) => {
+    try {
+      getVisitorData((res) => {
+        const currentDate = new Date();
+
+        addDoc(actionsRef, {
+          author: res.data,
+          actionDate: currentDate.toDateString(),
+          actionTime: currentDate.toTimeString(),
+          description: `Interacted with your ${name} and viewed its ${link}.`,
+          timestamp: serverTimestamp(),
+        })
+          .then(() => {})
+          .catch(() => {});
+      });
+
+      const docRef = doc(firestore, "projects", project.id);
+      getDoc(docRef)
+        .then((res) => {
+          const doc = res._document.data.value.mapValue.fields;
+          const interactions = parseInt(doc.interactions?.integerValue) + 1;
+
+          updateDoc(docRef, { interactions })
+            .then(() => {})
+            .catch(() => {});
+        })
+        .catch(() => {});
+    } catch (ex) {}
   };
 
   return (
@@ -27,12 +66,22 @@ const Project = ({ project }) => {
       <Description>{project.description}</Description>
 
       <Resources>
-        <Preview href={project.appURL} target="_blank" rel="noreferrer">
+        <Preview
+          href={project.appURL}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => handleProjectClick(project?.title, "live demo")}
+        >
           <span>Preview</span>
           <AiOutlineEye />
         </Preview>
 
-        <GitHub href={project.sourceURL} target="_blank" rel="noreferrer">
+        <GitHub
+          href={project.sourceURL}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => handleProjectClick(project?.title, "source code")}
+        >
           <span>Source code</span>
           <AiFillGithub />
         </GitHub>
