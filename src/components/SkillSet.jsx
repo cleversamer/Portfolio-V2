@@ -18,7 +18,7 @@ const Container = styled.section`
   background-color: #f5f6f7;
   padding: 20px 30px;
   border-radius: 20px;
-  border-top: 3px solid #000;
+  border-top: 3px solid #9747ff;
   transition-duration: 167ms;
   cursor: pointer;
 
@@ -36,6 +36,10 @@ const Heading = styled.h2`
   width: 100%;
   min-width: max-content;
   text-align: center;
+  color: #9747ff;
+  font-size: 22px;
+  border-bottom: 1px solid #9747ff;
+  line-height: 1.2;
 
   @media screen and (max-width: 820px) {
     font-size: 20px;

@@ -106,6 +106,7 @@ const Resume = styled.a`
   :hover,
   :active {
     color: #9747ff;
+    border-color: #9747ff;
   }
 `;
 
