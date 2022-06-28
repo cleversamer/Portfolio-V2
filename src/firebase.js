@@ -3,11 +3,11 @@ import { getFirestore, collection, query, orderBy } from "firebase/firestore";
 
 const config = {
   apiKey: process.env["REACT_APP_FIREBASE_API_KEY"],
-  authDomain: "cleversamer.firebaseapp.com",
-  projectId: "cleversamer",
-  storageBucket: "cleversamer.appspot.com",
-  messagingSenderId: "1040549409564",
-  appId: "1:1040549409564:web:093209eac678aab46540d9",
+  authDomain: process.env["REACT_APP_FIREBASE_AUTH_DOMAIN"],
+  projectId: process.env["REACT_APP_FIREBASE_PROJECT_ID"],
+  storageBucket: process.env["REACT_APP_FIREBASE_STORAGE_BUCKET"],
+  messagingSenderId: process.env["REACT_APP_FIREBASE_MESSAGING_SENDER_ID"],
+  appId: process.env["REACT_APP_FIREBASE_APP_ID"],
 };
 
 initializeApp(config);

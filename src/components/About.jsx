@@ -27,10 +27,11 @@ const About = () => {
       </Heading>
 
       <Paragraph>
-        I am a software engineer with 3+ years of experience in programming, and
-        I have a solid understanding of JavaScript and its frameworks. I have
-        excellent experience in building and developing scalable, maintainable,
-        and high-performance applications.
+        I’m a software engineer with 3+ years of experience in programming, and
+        I have a solid understanding of JavaScript and many of its frameworks. I
+        also have excellent experience building and developing scalable,
+        maintainable, high-performance applications, as shown on the portfolio
+        page.
       </Paragraph>
 
       <Resume
@@ -81,7 +82,7 @@ const Highlight = styled.span`
 `;
 
 const Paragraph = styled.p`
-  font-size: 16px;
+  font-size: 15px;
   color: #505050;
   max-width: 500px;
   margin-bottom: 32px;

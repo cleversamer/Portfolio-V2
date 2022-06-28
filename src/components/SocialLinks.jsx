@@ -48,15 +48,6 @@ const SocialLinks = () => {
       </a>
 
       <a
-        href="https://instagram.com/cleversamerr"
-        target="_blank"
-        rel="noreferrer"
-        onClick={() => handleLinkClick("Instagram")}
-      >
-        <img src="/assets/instagram.svg" alt="Instagram logo" />
-      </a>
-
-      <a
         href="https://linkedin.com/in/cleversamerr"
         target="_blank"
         rel="noreferrer"
