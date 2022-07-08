@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { onSnapshot } from "firebase/firestore";
-import { skillSetsQuery } from "../firebase";
+import { useSelector } from "react-redux";
+import { selectSkillSets } from "../store/skillSets";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import SkillSet from "../components/SkillSet";
@@ -8,26 +7,7 @@ import List from "../components/List";
 import Heading from "../components/Heading";
 
 const Skills = () => {
-  const [skillSets, setSkillSets] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      skillSetsQuery,
-      (snapshot) => {
-        const data = snapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .filter((doc) => doc.visible);
-        setSkillSets(data);
-      },
-      (err) => {
-        alert(
-          `An error was occurred when fetching skills from the database.\n${err.code}: ${err.message}`
-        );
-      }
-    );
-
-    return unsubscribe;
-  }, []);
+  const skillSets = useSelector(selectSkillSets);
 
   return (
     <Container>

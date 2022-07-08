@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import { onSnapshot } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectProjects } from "../store/projects";
+import { selectSkills } from "../store/skills";
 import * as config from "../config";
-import { skillsQuery, projectsQuery } from "../firebase";
 import { paginate } from "../utilities/paginate";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
@@ -12,53 +13,39 @@ import Project from "../components/Project";
 import Pagination from "../components/Pagination";
 
 const Portfolio = () => {
-  const [projects, setProjects] = useState([]);
-  const [badges, setBadges] = useState([]);
+  const projects = useSelector(selectProjects);
+  const skills = useSelector(selectSkills);
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [displayProjects, setDisplayProjects] = useState([]);
+  const [displaySkills, setDisplaySkills] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      skillsQuery,
-      (snapshot) => {
-        const data = snapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .filter((skill) => skill.visible);
-        setBadges([...data]);
-      },
-      (err) => {
-        alert(
-          `An error was occurred when fetching skills from the database.\n${err.code}: ${err.message}`
-        );
+    setDisplayProjects(projects);
+
+    let mappedSkills = skills.map((skill) => {
+      if (skill.title === "All") {
+        return { ...skill, count: projects.length, selected: true };
       }
-    );
 
-    return unsubscribe;
-  }, []);
+      let count = 0;
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      projectsQuery,
-      (snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          visible: true,
-          ...doc.data(),
-        }));
-        setProjects(data);
-      },
-      (err) => {
-        alert(
-          `An error was occurred when fetching projects from the database.\n${err.code}: ${err.message}`
-        );
+      for (let project of projects) {
+        let skillSet = project.techStack.map((i) => i.title);
+        if (skillSet.includes(skill.title)) {
+          count++;
+        }
       }
-    );
 
-    return unsubscribe;
-  }, []);
+      return { ...skill, count };
+    });
+
+    setDisplaySkills(mappedSkills);
+  }, [projects, skills]);
 
   const handleBadgeClick = (badge) => {
-    let bList = [...badges];
-    let pList = [...projects];
+    let bList = [...displaySkills];
+    let pList = [...displayProjects];
 
     bList = bList.map((i) => ({ ...i, selected: i.title === badge.title }));
 
@@ -77,12 +64,12 @@ const Portfolio = () => {
           });
 
     setCurrentPage(1);
-    setBadges(bList);
-    setProjects(pList);
+    setDisplaySkills(bList);
+    setDisplayProjects(pList);
   };
 
   const getPagedProjects = () => {
-    const filtered = projects.filter((p) => p.visible);
+    const filtered = displayProjects.filter((p) => p.visible);
     const paged = paginate(filtered, currentPage, config.projectsPageSize);
     return { itemsCount: filtered.length, data: paged };
   };
@@ -100,7 +87,7 @@ const Portfolio = () => {
         />
 
         <Badges>
-          {badges?.map((badge) => (
+          {displaySkills?.map((badge) => (
             <Badge
               key={badge.title}
               badge={badge}

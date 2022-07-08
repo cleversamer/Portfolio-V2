@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import getVisitorData from "./services/getVisitorData";
-import sendEmail from "./services/sendEmail";
-import { addDoc, serverTimestamp } from "firebase/firestore";
-import { visitorsRef } from "./firebase";
+import { useDispatch } from "react-redux";
+import * as config from "./config";
+import recordVisit from "./services/recordVisit";
+import fetchData from "./services/fetchData";
 import styled from "styled-components";
 import Home from "./pages/Home";
 import Skills from "./pages/Skills";
@@ -13,32 +14,40 @@ import Events from "./pages/Events";
 import Intro from "./pages/Intro";
 
 const App = () => {
-  const [isLoading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [projectsFetched, setProjectsFetched] = useState(false);
+  const [skillsFetched, setSkillsFetched] = useState(false);
+  const [skillSetsFetched, setSkillSetsFetched] = useState(false);
 
   useEffect(() => {
-    getVisitorData((res) => {
-      const currentDate = new Date();
-      addDoc(visitorsRef, {
-        visitDate: currentDate.toDateString(),
-        visitTime: currentDate.toTimeString(),
-        visitorData: res.data,
-        timestamp: serverTimestamp(),
-      });
-      sendEmail({
-        lastVisit: `${currentDate.toDateString()} at ${currentDate.toTimeString()}`,
-      });
-    });
-
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, config.loadingDuration);
+
+    recordVisit();
+
+    const unsubscribe = fetchData(
+      dispatch,
+      setProjectsFetched,
+      setSkillsFetched,
+      setSkillSetsFetched
+    );
+
+    return unsubscribe;
   }, []);
+
+  const handleContinueWithError = () => {
+    setProjectsFetched(true);
+    setSkillsFetched(true);
+    setSkillSetsFetched(true);
+  };
 
   return (
     <Container>
-      {isLoading && <Intro />}
+      {loading && <Intro spinner={true} />}
 
-      {!isLoading && (
+      {projectsFetched && skillsFetched && skillSetsFetched ? (
         <Routes>
           <Route path="/events" element={<Events />} />
           <Route path="/portfolio" element={<Portfolio />} />
@@ -47,6 +56,12 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>
+      ) : (
+        <Intro
+          onContinue={handleContinueWithError}
+          error={config.fetchErrorMssg}
+          spinner={false}
+        />
       )}
     </Container>
   );
