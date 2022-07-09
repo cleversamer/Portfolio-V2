@@ -24,33 +24,27 @@ const App = () => {
   const [skillSetsFetched, setSkillSetsFetched] = useState(false);
 
   useEffect(() => {
+    checkUser((isBlocked) => {
+      setUserBlocked(isBlocked);
+    });
+  }, [userBlocked]);
+
+  useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, config.loadingDuration);
 
-    let unsubscribe;
-
-    checkUser(handleBlockUser, () => {
-      unsubscribe = handleAllowUser();
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const handleBlockUser = () => {
-    setUserBlocked(true);
-  };
-
-  const handleAllowUser = () => {
     recordVisit();
 
-    return fetchData(
+    const unsubscribe = fetchData(
       dispatch,
       setProjectsFetched,
       setSkillsFetched,
       setSkillSetsFetched
     );
-  };
+
+    return unsubscribe;
+  }, []);
 
   const handleContinueWithError = () => {
     setProjectsFetched(true);

@@ -1,19 +1,19 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { query, where, getDocs } from "firebase/firestore";
+import { query, where, onSnapshot } from "firebase/firestore";
 import { blockedRef } from "../firebase";
 import getVisitorData from "./getVisitorData";
 
-export default function (blockUser, allowUser) {
+export default function (blockUser) {
   getVisitorData((res) => {
     const blockedQuery = query(blockedRef, where("IPv4", "==", res.data.IPv4));
 
-    getDocs(blockedQuery).then((res) => {
-      const blocked = res.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      if (blocked.length) {
-        blockUser();
-      } else {
-        allowUser();
-      }
+    onSnapshot(blockedQuery, (snapshot) => {
+      const blocked = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      blockUser(blocked.length);
     });
   });
 }
