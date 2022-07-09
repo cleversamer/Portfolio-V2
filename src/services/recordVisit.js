@@ -4,9 +4,10 @@ import sendEmail from "./sendEmail";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import { visitorsRef } from "../firebase";
 
-export default function () {
+export default function (blockUser) {
   getVisitorData((res) => {
     const currentDate = new Date();
+
     addDoc(visitorsRef, {
       visitDate: currentDate.toDateString(),
       visitTime: currentDate.toTimeString(),
