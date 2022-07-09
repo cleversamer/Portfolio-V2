@@ -18,6 +18,7 @@ import BlockedUser from "./pages/BlockedUser";
 const App = () => {
   const dispatch = useDispatch();
   const [userBlocked, setUserBlocked] = useState(false);
+  const [fetchAllowed, setFetchAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [projectsFetched, setProjectsFetched] = useState(false);
   const [skillsFetched, setSkillsFetched] = useState(false);
@@ -26,6 +27,7 @@ const App = () => {
   useEffect(() => {
     checkUser((isBlocked) => {
       setUserBlocked(isBlocked);
+      setFetchAllowed(!isBlocked);
     });
   }, [userBlocked]);
 
@@ -34,17 +36,19 @@ const App = () => {
       setLoading(false);
     }, config.loadingDuration);
 
-    recordVisit();
+    if (fetchAllowed) {
+      recordVisit();
 
-    const unsubscribe = fetchData(
-      dispatch,
-      setProjectsFetched,
-      setSkillsFetched,
-      setSkillSetsFetched
-    );
+      const unsubscribe = fetchData(
+        dispatch,
+        setProjectsFetched,
+        setSkillsFetched,
+        setSkillSetsFetched
+      );
 
-    return unsubscribe;
-  }, []);
+      return unsubscribe;
+    }
+  }, [fetchAllowed]);
 
   const handleContinueWithError = () => {
     setProjectsFetched(true);
