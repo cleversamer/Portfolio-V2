@@ -2,6 +2,7 @@
 import { query, where, onSnapshot } from "firebase/firestore";
 import { blockedRef } from "../firebase";
 import getVisitorData from "./getVisitorData";
+import * as config from "../config";
 
 export default function (blockUser) {
   getVisitorData((res) => {
@@ -13,7 +14,11 @@ export default function (blockUser) {
         ...doc.data(),
       }));
 
-      blockUser(blocked.length);
+      const condition =
+        !!blocked.length ||
+        config.blockedCountries.includes(res.data.country_code);
+
+      blockUser(condition);
     });
   });
 }
