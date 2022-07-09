@@ -36,7 +36,7 @@ const About = () => {
 
       <Resume
         download
-        href="assets/resume.pdf"
+        href="/assets/Resume.pdf"
         className="click-animation-2"
         onClick={handleResumeClick}
       >
