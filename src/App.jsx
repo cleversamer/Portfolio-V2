@@ -64,7 +64,7 @@ const App = () => {
     <Container>
       {loading && <Intro spinner={true} />}
 
-      {projectsFetched && skillsFetched && skillSetsFetched ? (
+      {!loading && projectsFetched && skillsFetched && skillSetsFetched ? (
         <Routes>
           <Route path="/events" element={<Events />} />
           <Route path="/portfolio" element={<Portfolio />} />
