@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Skills from "./pages/Skills";
 import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
-import Events from "./pages/Events";
+import Activities from "./pages/Activities";
 import Intro from "./pages/Intro";
 import BlockedUser from "./pages/BlockedUser";
 
@@ -66,7 +66,7 @@ const App = () => {
 
       {!loading && projectsFetched && skillsFetched && skillSetsFetched ? (
         <Routes>
-          <Route path="/events" element={<Events />} />
+          <Route path="/activity" element={<Activities />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/not-found" element={<NotFound />} />

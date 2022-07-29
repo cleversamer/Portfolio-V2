@@ -43,10 +43,10 @@ const Navbar = ({ page }) => {
         </NavItem>
 
         <NavItem
-          className={page === "events" && "selected"}
+          className={page === "activity" && "selected"}
           onClick={() => setShowMenu(false)}
         >
-          <Link to="/events">events</Link>
+          <Link to="/activity">activity</Link>
         </NavItem>
       </NavItems>
     </Container>
@@ -71,11 +71,11 @@ const Container = styled.nav`
     align-items: center;
   }
 
-  @media screen and (min-width: 768px) {
-    .selected {
-      color: #9747ff;
-    }
+  /* @media screen and (min-width: 768px) { */
+  .selected {
+    color: #9747ff;
   }
+  /* } */
 
   input[type="checkbox"] {
     display: none;
@@ -158,6 +158,10 @@ const NavItem = styled.li`
     height: fit-content;
   }
 
+  .selected {
+    color: #9747ff;
+  }
+
   a {
     font-size: 20px;
     font-family: "Inter", sans-serif;
@@ -170,7 +174,6 @@ const NavItem = styled.li`
       display: block;
       font-size: 20px;
       transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      color: #fff;
 
       :active,
       :hover {
