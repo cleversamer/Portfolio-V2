@@ -15,6 +15,7 @@ import Pagination from "../components/Pagination";
 const Portfolio = () => {
   const projects = useSelector(selectProjects);
   const skills = useSelector(selectSkills);
+  const [selectedSkill, setSelectedSkill] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [displayProjects, setDisplayProjects] = useState([]);
@@ -44,6 +45,8 @@ const Portfolio = () => {
   }, [projects, skills]);
 
   const handleBadgeClick = (badge) => {
+    setSelectedSkill(badge.title);
+
     let bList = [...displaySkills];
     let pList = [...displayProjects];
 
@@ -96,11 +99,22 @@ const Portfolio = () => {
           ))}
         </Badges>
 
-        <Projects>
-          {data.map((project) => (
-            <Project key={project.id} project={project} />
-          ))}
-        </Projects>
+        {data.length ? (
+          <Projects>
+            {data.map((project) => (
+              <Project key={project.id} project={project} />
+            ))}
+          </Projects>
+        ) : (
+          <NoProjects>
+            <p>
+              No projects found for{" "}
+              <span style={{ fontWeight: "bold", textDecoration: "underline" }}>
+                {selectedSkill}
+              </span>
+            </p>
+          </NoProjects>
+        )}
 
         <Pagination
           itemsCount={itemsCount}
@@ -151,6 +165,15 @@ const Projects = styled.div`
   @media screen and (max-width: 767px) {
     grid-template-columns: repeat(1, 1fr);
   }
+`;
+
+const NoProjects = styled.div`
+  width: 100%;
+  margin-top: 17vh;
+  text-align: center;
+  color: #303030;
+  font-weight: 500;
+  opacity: 0.9;
 `;
 
 export default Portfolio;
