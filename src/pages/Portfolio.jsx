@@ -130,11 +130,12 @@ const Badges = styled.ul`
   display: flex;
   gap: 10px;
   padding: 0 30px;
+
   @media screen and (min-width: 768px) {
+    justify-content: center;
     flex-wrap: wrap;
     width: fit-content;
     margin: 0 auto;
-    padding: 0 100px;
   }
 `;
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Badge = ({ badge, onClick }) => {
   const renderContent = () => {
     let content = badge.title;
-    if (badge.count) {
+    if (badge.count || badge.count === 0) {
       content = `${content} (${badge.count})`;
     }
 
@@ -19,7 +19,7 @@ const Badge = ({ badge, onClick }) => {
 
 const Container = styled.li`
   font-weight: 500;
-  min-width: 140px;
+  min-width: 135px;
   text-align: center;
   border-radius: 40px;
   background-color: ${({ selected }) => (selected ? "#303030" : "#F5F6F7")};
