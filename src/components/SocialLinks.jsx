@@ -56,7 +56,7 @@ const SocialLinks = () => {
         <img src="/assets/linkedin.svg" alt="LinkedIn logo" />
       </a>
 
-      <a
+      {/* <a
         href="https://www.upwork.com/freelancers/~015fe962fca7326506"
         target="_blank"
         rel="noreferrer"
@@ -67,7 +67,7 @@ const SocialLinks = () => {
           alt="Upwork logo"
           className="medium-image"
         />
-      </a>
+      </a> */}
 
       <a
         href="mailto:thedev.samer@gmail.com"
@@ -94,6 +94,7 @@ const Container = styled.section`
     width: 36px;
     height: 36px;
     object-fit: contain;
+    /* filter: grayscale(); */
   }
 
   .medium-image {

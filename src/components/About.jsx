@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import styled from "styled-components";
 import { actionsRef } from "../firebase";
 import { addDoc, serverTimestamp } from "firebase/firestore";
@@ -21,17 +22,22 @@ const About = () => {
   return (
     <Container>
       <Heading>
-        Hi, I’m Samer A.
-        <br />
-        I’m a <Highlight>Software engineer</Highlight>
+        <span>
+          Hi, I’m Samer{" "}
+          <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" />
+        </span>
+
+        <span>
+          I’m a <Highlight>Web &amp; Mobile Developer</Highlight>
+        </span>
       </Heading>
 
       <Paragraph>
-        I’m a software engineer with 3+ years of experience in programming, and
-        I have a solid understanding of JavaScript and many of its frameworks. I
-        also have excellent experience building and developing scalable,
-        maintainable, high-performance applications, as shown on the portfolio
-        page.
+        I’m a software engineer with 3+ years of experience in building and
+        developing Web &amp; Mobile Apps with a primary focus on scalability
+        &amp; performance. And unlike less-knowledged or weak developers, with
+        my professional expertise, I can build you a high-performance Web or
+        Mobile App that fits your business requirements exactly.
       </Paragraph>
 
       <Resume
@@ -58,27 +64,52 @@ const Container = styled.section`
   }
 `;
 
+const Highlight = styled.span`
+  background-color: #303030;
+  color: #fff;
+  text-transform: capitalize;
+`;
+
 const Heading = styled.h2`
+  display: flex;
+  flex-direction: column;
   font-size: 58px;
   margin-bottom: 10px;
   width: 100%;
   min-width: max-content;
+
+  ${Highlight} {
+    margin-left: 5px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+
+    img {
+      width: 40px;
+      margin-left: 5px;
+
+      @media screen and (max-width: 768px) {
+        width: 30px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      justify-content: center;
+    }
+  }
 
   @media screen and (max-width: 1440px) {
     font-size: 34px;
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 26px;
+    font-size: 24px;
     text-align: center;
     margin-bottom: 15px;
   }
-`;
-
-const Highlight = styled.span`
-  background-color: #303030;
-  color: #fff;
-  text-transform: capitalize;
 `;
 
 const Paragraph = styled.p`

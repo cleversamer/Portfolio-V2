@@ -20,14 +20,11 @@ const Container = styled.section`
   border-radius: 20px;
   border-top: 3px solid #9747ff;
   transition-duration: 167ms;
+  min-height: 250px;
   cursor: pointer;
 
   :hover {
-    transform: scale(0.98);
-  }
-
-  :active {
-    transform: scale(0.97);
+    transform: scale(0.99);
   }
 `;
 
