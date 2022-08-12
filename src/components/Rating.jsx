@@ -42,8 +42,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 13px;
-  margin-top: -5px;
-  margin-bottom: 8px;
+  margin-top: -7px;
+  margin-bottom: 10px;
 `;
 
 const StarsContainer = styled.div`
@@ -75,6 +75,10 @@ const StrongText = styled.span`
   font-weight: 700;
   margin-right: 5px;
   font-size: 14px;
+
+  @media screen and (max-width: 480px) {
+    font-size: 13px;
+  }
 `;
 
 export default Rating;

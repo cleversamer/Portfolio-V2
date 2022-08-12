@@ -108,10 +108,11 @@ const Portfolio = () => {
         ) : (
           <NoProjects>
             <p>
-              No projects found for{" "}
+              No{" "}
               <span style={{ fontWeight: "bold", textDecoration: "underline" }}>
                 {selectedSkill}
-              </span>
+              </span>{" "}
+              projects found, or you have a network issue.
             </p>
           </NoProjects>
         )}

@@ -59,12 +59,18 @@ const Project = ({ project }) => {
 
       <Title>{project?.title}</Title>
 
-      <Description>
-        <StrongText>Category:</StrongText>{" "}
-        {project.category || "Web application"}
-      </Description>
+      <InfoContainer>
+        <InfoDescription>
+          <StrongText>Category:</StrongText>{" "}
+          {project.category || "Web application"}
+        </InfoDescription>
 
-      <Rating project={project} onRate={handleRate} />
+        <InfoDescription>
+          <StrongText>Date:</StrongText> {project.date || "Jan 1, 2022"}
+        </InfoDescription>
+
+        <Rating project={project} onRate={handleRate} />
+      </InfoContainer>
 
       <TechStack>
         {mapTechStackToView().map((tech) => (
@@ -97,6 +103,11 @@ const Container = styled.article`
   max-width: 400px;
 `;
 
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Image = styled.img`
   width: 100%;
   padding: 10px;
@@ -121,16 +132,16 @@ const TechStack = styled.ul`
 
 const Description = styled.p`
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   color: #505050;
-
-  :last-of-type {
-    margin-bottom: 15px;
-  }
 
   @media screen and (max-width: 480px) {
     font-size: 13px;
   }
+`;
+
+const InfoDescription = styled(Description)`
+  margin-bottom: 3px;
 `;
 
 const StrongText = styled.span`
