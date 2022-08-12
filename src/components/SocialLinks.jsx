@@ -1,40 +1,17 @@
 import styled from "styled-components";
-import { actionsRef } from "../firebase";
-import { addDoc, serverTimestamp } from "firebase/firestore";
-import getVisitorData from "../services/getVisitorData";
 
 const SocialLinks = () => {
-  const handleLinkClick = (link) => {
-    getVisitorData((res) => {
-      const currentDate = new Date();
-
-      addDoc(actionsRef, {
-        author: res.data,
-        actionDate: currentDate.toDateString(),
-        actionTime: currentDate.toTimeString(),
-        description: `Interacted with your ${link} link.`,
-        timestamp: serverTimestamp(),
-      });
-    });
-  };
-
   return (
     <Container>
       <a
         href="https://github.com/cleversamerr"
         target="_blank"
         rel="noreferrer"
-        onClick={() => handleLinkClick("GitHub")}
       >
         <img src="/assets/github.svg" alt="GitHub logo" />
       </a>
 
-      <a
-        href="https://wa.me/972597367603"
-        target="_blank"
-        rel="noreferrer"
-        onClick={() => handleLinkClick("WhatsApp")}
-      >
+      <a href="https://wa.me/972597367603" target="_blank" rel="noreferrer">
         <img src="/assets/whatsapp.svg" alt="WhatsApp logo" />
       </a>
 
@@ -42,7 +19,6 @@ const SocialLinks = () => {
         href="https://twitter.com/cleversamerr"
         target="_blank"
         rel="noreferrer"
-        onClick={() => handleLinkClick("Twitter")}
       >
         <img src="/assets/twitter.svg" alt="Twitter logo" />
       </a>
@@ -51,7 +27,6 @@ const SocialLinks = () => {
         href="https://linkedin.com/in/cleversamerr"
         target="_blank"
         rel="noreferrer"
-        onClick={() => handleLinkClick("LinkedIn")}
       >
         <img src="/assets/linkedin.svg" alt="LinkedIn logo" />
       </a>
@@ -60,7 +35,6 @@ const SocialLinks = () => {
         href="https://www.upwork.com/freelancers/~015fe962fca7326506"
         target="_blank"
         rel="noreferrer"
-        onClick={() => handleLinkClick("Upwork")}
       >
         <img
           src="/assets/upwork.svg"
@@ -69,12 +43,7 @@ const SocialLinks = () => {
         />
       </a> */}
 
-      <a
-        href="mailto:thedev.samer@gmail.com"
-        target="_blank"
-        rel="noreferrer"
-        onClick={() => handleLinkClick("GMail")}
-      >
+      <a href="mailto:thedev.samer@gmail.com" target="_blank" rel="noreferrer">
         <img src="/assets/gmail.png" alt="Gmail logo" className="big-image" />
       </a>
     </Container>

@@ -1,17 +1,15 @@
 import styled from "styled-components";
-import firestore, { actionsRef } from "../firebase";
-import {
-  doc,
-  addDoc,
-  getDoc,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import getVisitorData from "../services/getVisitorData";
+import firestore from "../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { setProjectRatingInfo } from "../store/projects";
 import Badge from "./Badge";
 import { AiOutlineEye, AiFillGithub } from "react-icons/ai";
+import Rating from "./Rating";
 
 const Project = ({ project }) => {
+  const dispatch = useDispatch();
+
   const mapTechStackToView = () => {
     let skills = [...project.techStack];
     if (skills.length > 4) {
@@ -21,34 +19,38 @@ const Project = ({ project }) => {
     return skills;
   };
 
-  const handleProjectClick = (name, link) => {
-    try {
-      getVisitorData((res) => {
-        const currentDate = new Date();
+  const handleRate = (newRating) => {
+    const docRef = doc(firestore, "projects", project.id);
+    getDoc(docRef)
+      .then((res) => {
+        const doc = res._document.data.value.mapValue.fields;
+        const ratingCount = parseInt(
+          doc.rating.mapValue.fields.count.integerValue
+        );
+        const ratingValue = parseInt(
+          doc.rating.mapValue.fields.value.integerValue
+        );
+        const rating = {
+          count:
+            project?.ratingInfo.count === 1 ? ratingCount : ratingCount + 1,
+          value: ratingValue + (newRating - project?.ratingInfo.value),
+        };
 
-        addDoc(actionsRef, {
-          author: res.data,
-          actionDate: currentDate.toDateString(),
-          actionTime: currentDate.toTimeString(),
-          description: `Interacted with your ${name} and viewed its ${link}.`,
-          timestamp: serverTimestamp(),
-        })
-          .then(() => {})
+        updateDoc(docRef, { rating })
+          .then(() => {
+            dispatch(
+              setProjectRatingInfo(
+                project.id,
+                { count: 1, value: newRating },
+                rating
+              )
+            );
+          })
           .catch(() => {});
+      })
+      .catch((err) => {
+        alert(err.message);
       });
-
-      const docRef = doc(firestore, "projects", project.id);
-      getDoc(docRef)
-        .then((res) => {
-          const doc = res._document.data.value.mapValue.fields;
-          const interactions = parseInt(doc.interactions?.integerValue) + 1;
-
-          updateDoc(docRef, { interactions })
-            .then(() => {})
-            .catch(() => {});
-        })
-        .catch(() => {});
-    } catch (ex) {}
   };
 
   return (
@@ -56,6 +58,13 @@ const Project = ({ project }) => {
       <Image src={project?.imageURL} alt={project?.title} />
 
       <Title>{project?.title}</Title>
+
+      <Description>
+        <StrongText>Category:</StrongText>{" "}
+        {project.category || "Web application"}
+      </Description>
+
+      <Rating project={project} onRate={handleRate} />
 
       <TechStack>
         {mapTechStackToView().map((tech) => (
@@ -66,25 +75,19 @@ const Project = ({ project }) => {
       <Description>{project.description}</Description>
 
       <Resources>
-        <Preview
-          href={project.appURL}
-          target="_blank"
-          rel="noreferrer"
-          onClick={() => handleProjectClick(project?.title, "live demo")}
-        >
+        <ButtonFilled href={project.appURL} target="_blank" rel="noreferrer">
           <span>Preview</span>
           <AiOutlineEye />
-        </Preview>
+        </ButtonFilled>
 
-        <GitHub
+        <ButtonOutlined
           href={project.sourceURL}
           target="_blank"
           rel="noreferrer"
-          onClick={() => handleProjectClick(project?.title, "source code")}
         >
           <span>Source code</span>
           <AiFillGithub />
-        </GitHub>
+        </ButtonOutlined>
       </Resources>
     </Container>
   );
@@ -105,7 +108,7 @@ const Image = styled.img`
 
 const Title = styled.h4`
   margin-top: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
   font-size: 22px;
 `;
 
@@ -118,12 +121,24 @@ const TechStack = styled.ul`
 
 const Description = styled.p`
   font-size: 14px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   color: #505050;
+
+  :last-of-type {
+    margin-bottom: 15px;
+  }
 
   @media screen and (max-width: 480px) {
     font-size: 13px;
   }
+`;
+
+const StrongText = styled.span`
+  text-decoration: underline;
+  font-style: italic;
+  font-weight: 700;
+  color: #303030;
+  margin-right: 3px;
 `;
 
 const Resources = styled.div`
@@ -165,7 +180,7 @@ const Button = styled.a`
   }
 `;
 
-const Preview = styled(Button)`
+const ButtonFilled = styled(Button)`
   background-color: #303030;
   color: #fff;
 
@@ -174,8 +189,15 @@ const Preview = styled(Button)`
   }
 `;
 
-const GitHub = styled(Button)`
+const ButtonOutlined = styled(Button)`
   border: 2px solid #000;
+  transition-duration: 167ms;
+
+  :hover,
+  :active {
+    color: #9747ff;
+    border-color: #9747ff;
+  }
 `;
 
 export default Project;

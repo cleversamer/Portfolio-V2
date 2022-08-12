@@ -17,7 +17,7 @@ const Intro = ({ onContinue, error, spinner }) => {
         <Designer>
           Designed By{" "}
           <a
-            href="https://twitter.com/_royalty_js"
+            href="https://twitter.com/royalty_fig"
             target="_blank"
             rel="noreferrer"
           >
@@ -52,7 +52,7 @@ const Heading = styled.h2`
   color: ${({ warning }) => (warning ? "#fe0000" : "#303030")};
 
   @media screen and (max-width: 480px) {
-    font-size: 18px;
+    font-size: 16px;
     margin: 0 2vw;
   }
 `;

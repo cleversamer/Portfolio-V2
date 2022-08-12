@@ -1,24 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import styled from "styled-components";
-import { actionsRef } from "../firebase";
-import { addDoc, serverTimestamp } from "firebase/firestore";
-import getVisitorData from "../services/getVisitorData";
 
 const About = () => {
-  const handleResumeClick = () => {
-    getVisitorData((res) => {
-      const currentDate = new Date();
-
-      addDoc(actionsRef, {
-        author: res.data,
-        actionDate: currentDate.toDateString(),
-        actionTime: currentDate.toTimeString(),
-        description: `Viewed your resume.`,
-        timestamp: serverTimestamp(),
-      });
-    });
-  };
-
   return (
     <Container>
       <Heading>
@@ -44,7 +27,6 @@ const About = () => {
         download
         href="https://github.com/cleversamerr/cleversamerr/raw/main/Resume.pdf"
         className="click-animation-2"
-        onClick={handleResumeClick}
       >
         View my resume
       </Resume>

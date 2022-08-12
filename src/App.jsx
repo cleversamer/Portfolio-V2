@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as config from "./config";
-import checkUser from "./services/checkUser";
-import recordVisit from "./services/recordVisit";
 import fetchData from "./services/fetchData";
 import styled from "styled-components";
 import Home from "./pages/Home";
@@ -13,52 +11,33 @@ import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
 import Activities from "./pages/Activities";
 import Intro from "./pages/Intro";
-import BlockedUser from "./pages/BlockedUser";
 
 const App = () => {
   const dispatch = useDispatch();
-  const [userBlocked, setUserBlocked] = useState(false);
-  const [fetchAllowed, setFetchAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [projectsFetched, setProjectsFetched] = useState(false);
   const [skillsFetched, setSkillsFetched] = useState(false);
   const [skillSetsFetched, setSkillSetsFetched] = useState(false);
 
   useEffect(() => {
-    checkUser((isBlocked) => {
-      setUserBlocked(isBlocked);
-      setFetchAllowed(!isBlocked);
-    });
-  }, [userBlocked]);
-
-  useEffect(() => {
     setTimeout(() => {
       setLoading(false);
+      clearTimeout();
     }, config.loadingDuration);
 
-    if (fetchAllowed) {
-      recordVisit();
-
-      const unsubscribe = fetchData(
-        dispatch,
-        setProjectsFetched,
-        setSkillsFetched,
-        setSkillSetsFetched
-      );
-
-      return unsubscribe;
-    }
-  }, [fetchAllowed]);
+    fetchData(
+      dispatch,
+      setProjectsFetched,
+      setSkillsFetched,
+      setSkillSetsFetched
+    );
+  }, []);
 
   const handleContinueWithError = () => {
     setProjectsFetched(true);
     setSkillsFetched(true);
     setSkillSetsFetched(true);
   };
-
-  if (userBlocked) {
-    return <BlockedUser />;
-  }
 
   return (
     <Container>
