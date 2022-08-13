@@ -11,16 +11,16 @@ const About = () => {
         </span>
 
         <span>
-          I’m a <Highlight>Web &amp; Mobile Developer</Highlight>
+          I’m a <Highlight>JavaScript Developer</Highlight>
         </span>
       </Heading>
 
       <Paragraph>
         I’m a software engineer with 3+ years of experience in building and
         developing Web &amp; Mobile Apps with a primary focus on scalability
-        &amp; performance. And unlike less-knowledged or weak developers, with
-        my professional expertise, I can build you a high-performance Web or
-        Mobile App that fits your business requirements exactly.
+        &amp; performance. And with my professional expertise, I can build you a
+        high-performance Web or Mobile App that fits your business requirements
+        exactly.
       </Paragraph>
 
       <Resume
@@ -50,6 +50,8 @@ const Highlight = styled.span`
   background-color: #303030;
   color: #fff;
   text-transform: capitalize;
+  padding: 0 4px;
+  text-align: center;
 `;
 
 const Heading = styled.h2`
@@ -95,11 +97,13 @@ const Heading = styled.h2`
 `;
 
 const Paragraph = styled.p`
-  font-size: 15px;
   color: #505050;
-  max-width: 500px;
+  font-size: 14px;
   margin-bottom: 32px;
+  max-width: 500px;
+  text-overflow: clip;
   width: fit-content;
+  word-wrap: break-word;
 
   @media screen and (max-width: 768px) {
     font-size: 14px;

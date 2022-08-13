@@ -42,7 +42,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 13px;
-  margin-top: -7px;
+  margin-top: -10px;
   margin-bottom: 10px;
 `;
 
@@ -62,19 +62,28 @@ const RatingInfo = styled.span`
 const Average = styled.h5`
   color: #303030;
   font-size: 20px;
+
+  @media screen and (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const Count = styled.span`
   font-size: 14px;
   color: #626262;
+
+  @media screen and (max-width: 480px) {
+    font-size: 13px;
+  }
 `;
 
 const StrongText = styled.span`
-  text-decoration: underline;
-  font-style: italic;
+  /* text-decoration: underline; */
+  /* font-style: italic; */
   font-weight: 700;
   margin-right: 5px;
   font-size: 14px;
+  margin-top: 3px;
 
   @media screen and (max-width: 480px) {
     font-size: 13px;

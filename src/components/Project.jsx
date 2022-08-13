@@ -145,8 +145,8 @@ const InfoDescription = styled(Description)`
 `;
 
 const StrongText = styled.span`
-  text-decoration: underline;
-  font-style: italic;
+  /* text-decoration: underline; */
+  /* font-style: italic; */
   font-weight: 700;
   color: #303030;
   margin-right: 3px;

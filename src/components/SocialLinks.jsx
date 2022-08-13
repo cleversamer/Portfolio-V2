@@ -60,8 +60,8 @@ const Container = styled.section`
   margin-top: 70px;
 
   .big-image {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     object-fit: contain;
     /* filter: grayscale(); */
   }
