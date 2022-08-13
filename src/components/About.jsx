@@ -124,6 +124,11 @@ const Resume = styled.a`
   :active {
     color: #9747ff;
     border-color: #9747ff;
+    transform: scale(0.99);
+  }
+
+  :active {
+    transform: scale(0.98);
   }
 `;
 

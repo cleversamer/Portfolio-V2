@@ -34,8 +34,14 @@ const AvatarImg = styled.img`
   width: 25vw;
   min-width: 250px;
   -webkit-filter: grayscale(100%);
+  transition-duration: 0.2s;
   filter: grayscale(100%);
   cursor: pointer;
+
+  :hover,
+  :active {
+    filter: none;
+  }
 `;
 
 export default Avatar;

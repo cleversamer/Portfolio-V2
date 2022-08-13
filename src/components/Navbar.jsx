@@ -1,11 +1,11 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { TbMenu } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io";
+import useToggle from "./../hooks/useToggle";
 
 const Navbar = ({ page }) => {
-  const [showMenu, setShowMenu] = useState(false);
+  const { value: showMenu, setValue: setShowMenu } = useToggle(false);
 
   return (
     <Container>
@@ -115,7 +115,19 @@ const Logo = styled.h1`
   font-size: 40px;
   font-family: "Kavoon", cursive;
   color: #000;
+  transition-duration: 176ms;
   cursor: pointer;
+
+  :hover,
+  :active {
+    color: #9747ff;
+    border-color: #9747ff;
+    transform: scale(1.05);
+  }
+
+  :active {
+    transform: scale(0.98);
+  }
 `;
 
 const NavItems = styled.ul`

@@ -59,11 +59,15 @@ const Container = styled.section`
   margin-right: 40px;
   margin-top: 70px;
 
+  > a:hover {
+    transition-duration: 176ms;
+    transform: scale(1.2);
+  }
+
   .big-image {
     width: 42px;
     height: 42px;
     object-fit: contain;
-    /* filter: grayscale(); */
   }
 
   .medium-image {

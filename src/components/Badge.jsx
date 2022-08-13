@@ -30,6 +30,12 @@ const Container = styled.li`
   cursor: pointer;
   padding: 10px 30px;
 
+  :hover,
+  :active {
+    color: #fff;
+    background-color: #9747ff;
+  }
+
   /* @media screen and (max-width: 767px) {
     order: ${({ selected }) => selected && "-1"};
   } */
