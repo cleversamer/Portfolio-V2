@@ -16,11 +16,10 @@ const About = () => {
       </Heading>
 
       <Paragraph>
-        I’m a software engineer with 3+ years of experience in building and
-        developing Web &amp; Mobile Apps with a primary focus on scalability
-        &amp; performance. And with my professional expertise, I can build you a
-        high-performance Web or Mobile App that fits your business requirements
-        exactly.
+        I’m a full-stack JavaScript developer, creative coder, and
+        self-proclaimed engineer specializing in front-end development. I make
+        it my mission to translate clients' ideas into fully working and
+        pixel-perfect web &amp; mobile applications that run blazing fast.
       </Paragraph>
 
       <Resume

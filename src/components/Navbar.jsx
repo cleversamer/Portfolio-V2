@@ -118,15 +118,17 @@ const Logo = styled.h1`
   transition-duration: 176ms;
   cursor: pointer;
 
-  :hover,
-  :active {
-    color: #9747ff;
-    border-color: #9747ff;
-    transform: scale(1.05);
-  }
+  @media screen and (min-width: 768px) {
+    :hover,
+    :active {
+      color: #9747ff;
+      border-color: #9747ff;
+      transform: scale(1.05);
+    }
 
-  :active {
-    transform: scale(0.98);
+    :active {
+      transform: scale(0.98);
+    }
   }
 `;
 

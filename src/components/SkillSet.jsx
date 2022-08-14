@@ -6,9 +6,11 @@ const SkillSet = ({ skillSet }) => {
       <Heading>{skillSet.title}</Heading>
 
       <Skills>
-        {skillSet.set.map((skill) => (
-          <li key={skill.title}>{skill.title}</li>
-        ))}
+        {skillSet.set
+          .filter((skill) => !skill.hidden)
+          .map((skill) => (
+            <li key={skill.title}>{skill.title}</li>
+          ))}
       </Skills>
     </Container>
   );
