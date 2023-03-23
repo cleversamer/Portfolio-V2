@@ -16,10 +16,10 @@ const About = () => {
       </Heading>
 
       <Paragraph>
-        I’m a full-stack JavaScript developer, creative coder, and
-        self-proclaimed engineer specializing in front-end development. I make
-        it my mission to translate clients' ideas into fully working and
-        pixel-perfect web &amp; mobile applications that run blazing fast.
+        I’m a JavaScript developer, creative coder, and self-proclaimed engineer
+        specializing in front-end development. I make it my mission to translate
+        clients' ideas into fully working and pixel-perfect web &amp; mobile
+        applications that run blazing fast.
       </Paragraph>
 
       <Resume
