@@ -52,13 +52,13 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>
-      ) : (
+      ) : !loading ? (
         <Intro
           onContinue={handleContinueWithError}
           error={config.fetchErrorMssg}
           spinner={false}
         />
-      )}
+      ) : null}
     </Container>
   );
 };

@@ -6,20 +6,21 @@ const About = () => {
     <Container>
       <Heading>
         <span>
-          Hi, I’m Samer{" "}
+          Hi, I'm Samer{" "}
           <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" />
         </span>
 
         <span>
-          I’m a <Highlight>JavaScript Developer</Highlight>
+          I'm a <Highlight>Backend Engineer</Highlight>
         </span>
       </Heading>
 
       <Paragraph>
-        I’m a JavaScript developer, creative coder, and self-proclaimed engineer
-        specializing in front-end development. I make it my mission to translate
-        clients' ideas into fully working and pixel-perfect web &amp; mobile
-        applications that run blazing fast.
+        Talented Backend Engineer adept at contributing to a highly
+        collaborative work environment, leading software teams, finding
+        solutions, and determining customer satisfaction. I designed and
+        developed web applications across multiple APIs, third-party
+        integrations, and databases.
       </Paragraph>
 
       <Resume
